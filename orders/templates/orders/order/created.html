@@ -3,7 +3,24 @@
 {% block title %}Thank you{% endblock %}
 
 {% block content %}
+<style>
+    .layer1 {
+
+     padding: 10px; /* Поля вокруг текста */
+     margin-top: 20%;
+     margin-bottom: 20%; /* Отступ снизу */
+    }
+    .layer2 {
+     margin-left: 40px; /* Отступ слева */
+     background: #e9c1e4; /* Цвет фона */
+     padding: 10px; /* Поля вокруг текста */
+    }
+   </style>
+<div class="container" >
+    <div class="layer1">
     <h1>Thank you</h1>
     <p>Your order has been successfully completed. Your order number is
         <strong>{{ order.id }}</strong>.</p>
+    </div>
+</div>
 {% endblock %}

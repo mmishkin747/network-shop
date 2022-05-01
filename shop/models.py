@@ -1,9 +1,31 @@
 from django.db import models
 from django.urls import reverse
+
 # Create your models here.
 
 
+class MainCatigory(models.Model):
+    name = models.CharField(max_length=200, db_index=True)
+    slug = models.SlugField(max_length=200, db_index=True, unique=True)
+
+    class Meta:
+        ordering = ('name',)
+        verbose_name = 'Главная категория'
+        verbose_name_plural = 'Главная категории'
+
+    def __str__(self):
+        return self.name
+    
+    @classmethod
+    def get_default_pk(cls):
+        exam, created = cls.objects.get_or_create(
+            name='Other',
+            slug='Other')
+        return exam.pk
+    
+
 class Category(models.Model):
+    main_category = models.ForeignKey(MainCatigory, related_name="categories", on_delete=models.CASCADE, default=MainCatigory.get_default_pk)
     name = models.CharField(max_length=200, db_index=True)
     slug = models.SlugField(max_length=200, db_index=True, unique=True)
 
@@ -13,7 +35,7 @@ class Category(models.Model):
         verbose_name_plural = 'Категории'
 
     def __str__(self):
-        return self.name
+        return self.name    
 
     def get_absolute_url(self):
         return reverse('shop:product_list_by_category',

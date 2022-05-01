@@ -4,11 +4,13 @@
     Your shopping cart
 {% endblock %}
 {% block content %}
+
+
 <div class="container py-5">
     <div class="row">
         <h1>Your shopping cart</h1>
         
-        <table class="card">
+        <table class="table">
             <thead>
             <tr>
                 <th>Image</th>
@@ -30,12 +32,13 @@
                                         {{ product.image.url }}
                                     {% else %}
                                         {% static "img/no_image.png" %}
-                                    {% endif %}">
+                                    {% endif %}" width="100" height="100">
                             </a>
                         </td>
                         <td>{{ product.name }}</td>
                         <td>{{ item.quantity }}</td>
-                        <td><a href="{% url "cart:cart_remove" product.id%}">Remove</a></td>
+                        <td><button type="button" class="btn btn-danger" href="{% url "cart:cart_remove" product.id%}">Remove</button></td>
+                        <!-- <td><a href="{% url "cart:cart_remove" product.id%}">Remove</a></td> -->
                         <td class="num">${{ item.price }}</td>
                         <td class="num">${{ item.total_price }}</td>
                     </tr>
@@ -50,12 +53,9 @@
         </table>
     </div>
     </div>
-        <p class="text-right">
-            <a href="{% url "shop:product_list" %}" class="button light">Continue shopping</a>
-            <a href="{% url "orders:order_create" %}" class="button">
-                Checkout
-            </a>
+        <p class="text-center">
+            <a href="{% url "shop:product_list" %}" class="btn bg-light"">Continue shopping</a>
+            <a href="{% url "orders:order_create" %}" class="btn btn-success">Checkout</a>
         </p>
-    </div>
 </div>    
 {% endblock %}

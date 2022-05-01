@@ -2,8 +2,14 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib import admin
-from .models import Category, Product
+from .models import Category, Product, MainCatigory
 
+
+
+class MainCatigoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'slug']
+    prepopulated_fields = {'slug': ('name',)}
+admin.site.register(MainCatigory, MainCatigoryAdmin)
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']

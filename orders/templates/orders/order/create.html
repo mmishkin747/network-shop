@@ -3,6 +3,9 @@
 {% block title %}Checkout{% endblock %}
 
 {% block content %}
+
+<!-- 
+<div class="container">
     <h1>Checkout</h1>
     <div class="order-info">
         <h3>Your order</h3>
@@ -21,4 +24,57 @@
         <p><input type="submit" value="Place order"></p>
         {% csrf_token %}
     </form>
-{% endblock %}
+</div>
+ -->
+
+
+ <div class="container1">
+    <div class="card1">
+        <div class="payment-details1">
+            <h3>Payment Details</h3>
+            <p>Complete your purchase by providing your payment details.</p>
+        
+        </div>
+        <form action="." method="post" class="order-form">
+        {% for field in form %}
+        <div class="input-text"><span>
+            <label for="id_subject">{{ field.label_tag }}</label>
+            </span>
+            {{ field }}
+            
+        </div>
+        {% endfor %}
+
+
+        <div class="summary">
+            
+            <div class="text-data">
+                {% for item in cart %}
+                <p>{{ item.product.name }} x {{ item.quantity }}</p>
+                {% endfor %}
+                <h5>Total</h5>
+            </div>
+            <div class="numerical-data">
+                {% for item in cart %}
+                <p>${{ item.total_price }}</p>
+                {% endfor %}
+                <h5>${{ cart.get_total_price }}</h5>
+            </div>
+        </div>
+
+            
+            <p class="pay"><input type="submit" value="Place order"></p>
+            {% csrf_token %}
+     
+        </form>
+        <div class="secure"> <i class="fa fa-lock"></i>
+            <p> </p>
+        </div>
+        <div class="last">
+        </div>
+    </div>
+</div>
+
+
+  
+  {% endblock %}
